@@ -124,7 +124,7 @@ void evaluate_genotype(Genotype genotype) {
 
   printf("fitness: %g\n", fitness);
   WbNodeRef robot = wb_supervisor_node_get_from_def("ROBOT");
-  wb_supervisor_node_reset_physics(robot);
+  wb_supervisor_node_reset_physics(robot, false);
 }
 
 void run_optimization() {

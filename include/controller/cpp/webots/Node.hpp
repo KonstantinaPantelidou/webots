@@ -139,7 +139,7 @@ namespace webots {
     const double *getVelocity() const;
 
     void setVelocity(const double velocity[6]);
-    void resetPhysics();
+    void resetPhysics(bool recursive = false);
     void restartController();
 
     void moveViewpoint() const;

@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
   // Pin the robot and check it doesn't touch anything.
   for (i = 0; i < 100; ++i) {
     wb_supervisor_field_set_sf_vec3f(translation_field, robot_target_translation);
-    wb_supervisor_node_reset_physics(robot_node);
+    wb_supervisor_node_reset_physics(robot_node, false);
     wb_robot_step(time_step);
     ts_assert_double_equal(wb_touch_sensor_get_value(ground_sensor), 0.0, "Robot touches the ground when pinned.");
     ts_assert_double_equal(wb_touch_sensor_get_value(walls_sensor), 0.0, "Robot touches the walls when pinned.");

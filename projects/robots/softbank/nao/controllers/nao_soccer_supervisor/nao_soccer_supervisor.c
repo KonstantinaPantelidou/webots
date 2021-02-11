@@ -630,7 +630,7 @@ static void move_robot_3d(int robot_index, double tx, double ty, double tz, doub
 
       wb_supervisor_field_set_sf_rotation(robots[robot_index]->rotation, rr);
     }
-    wb_supervisor_node_reset_physics(robots[robot_index]->robot_node);
+    wb_supervisor_node_reset_physics(robots[robot_index]->robot_node, false);
   }
 }
 
@@ -649,7 +649,7 @@ static void move_ball_3d(double tx, double ty, double tz) {
     double rot[4] = {0, 1, 0, 0};
     wb_supervisor_field_set_sf_vec3f(ball_translation, trans);
     wb_supervisor_field_set_sf_rotation(ball_rotation, rot);
-    wb_supervisor_node_reset_physics(ball);
+    wb_supervisor_node_reset_physics(ball, false);
   }
 }
 

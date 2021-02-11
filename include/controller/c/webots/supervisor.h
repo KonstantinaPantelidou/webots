@@ -110,7 +110,7 @@ const double *wb_supervisor_node_get_position(WbNodeRef node);
 bool wb_supervisor_node_get_static_balance(WbNodeRef node);
 const double *wb_supervisor_node_get_velocity(WbNodeRef node);
 void wb_supervisor_node_set_velocity(WbNodeRef node, const double velocity[6]);
-void wb_supervisor_node_reset_physics(WbNodeRef node);
+void wb_supervisor_node_reset_physics(WbNodeRef node, bool recursive);
 void wb_supervisor_node_restart_controller(WbNodeRef node);
 
 void wb_supervisor_node_move_viewpoint(WbNodeRef node);

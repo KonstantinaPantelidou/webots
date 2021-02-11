@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
     rotation[3] = double_rand(-M_PI, M_PI);
     wb_supervisor_field_set_sf_vec3f(translation_field, translation);
     wb_supervisor_field_set_sf_rotation(rotation_field, rotation);
-    wb_supervisor_node_reset_physics(robot_node);
+    wb_supervisor_node_reset_physics(robot_node, false);
     move_randomly(1.0);
   }
 
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
   rotation[3] = 0.0;
   wb_supervisor_field_set_sf_vec3f(translation_field, translation);
   wb_supervisor_field_set_sf_rotation(rotation_field, rotation);
-  wb_supervisor_node_reset_physics(robot_node);
+  wb_supervisor_node_reset_physics(robot_node, false);
 
   wb_robot_step(TIME_STEP);  // Apply the reset
   wb_robot_step(TIME_STEP);  // Let one step the stabilize the robot.

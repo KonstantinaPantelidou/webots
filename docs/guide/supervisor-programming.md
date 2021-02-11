@@ -234,7 +234,7 @@ int main() {
       // reset robot position and physics
       const double INITIAL[3] = { 0, 0.5, 0 };
       wb_supervisor_field_set_sf_vec3f(trans_field, INITIAL);
-      wb_supervisor_node_reset_physics(robot_node);
+      wb_supervisor_node_reset_physics(robot_node, false);
     }
   }
   // end of tests
@@ -408,7 +408,7 @@ for a = 0:25
     % reset robot position and physics
     INITIAL = [0, 0.5, 0];
     wb_supervisor_field_set_sf_vec3f(trans_field, INITIAL);
-    wb_supervisor_node_reset_physics(robot_node);
+    wb_supervisor_node_reset_physics(robot_node, false);
   end
 end
 ```

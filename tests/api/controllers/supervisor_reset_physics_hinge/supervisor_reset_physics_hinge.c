@@ -67,10 +67,10 @@ int main(int argc, char **argv) {
 
   wb_robot_step(TIME_STEP * 70);
 
-  wb_supervisor_node_reset_physics(normalTestBot);
-  wb_supervisor_node_reset_physics(protoTestBot);
-  wb_supervisor_node_reset_physics(nestedTestBot);
-  wb_supervisor_node_reset_physics(hinge2TestBot);
+  wb_supervisor_node_reset_physics(normalTestBot, false);
+  wb_supervisor_node_reset_physics(protoTestBot, false);
+  wb_supervisor_node_reset_physics(nestedTestBot, false);
+  wb_supervisor_node_reset_physics(hinge2TestBot, false);
 
   normalRotation = wb_supervisor_field_get_sf_rotation(normalRotField);
   protoRotation = wb_supervisor_field_get_sf_rotation(protoRotField);

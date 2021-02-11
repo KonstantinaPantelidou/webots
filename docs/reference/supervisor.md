@@ -1293,7 +1293,7 @@ The last three are respectively the angular velocities around the x, y and z axe
 ```c
 #include <webots/supervisor.h>
 
-void wb_supervisor_node_reset_physics(WbNodeRef node);
+void wb_supervisor_node_reset_physics(WbNodeRef node, bool recursive);
 ```
 
 %tab-end
@@ -1305,7 +1305,7 @@ void wb_supervisor_node_reset_physics(WbNodeRef node);
 
 namespace webots {
   class Node {
-    void resetPhysics();
+    void resetPhysics(bool recursive=false);
     // ...
   }
 }
@@ -1319,7 +1319,7 @@ namespace webots {
 from controller import Node
 
 class Node:
-    def resetPhysics(self):
+    def resetPhysics(self, recursive=False):
     # ...
 ```
 
@@ -1331,7 +1331,7 @@ class Node:
 import com.cyberbotics.webots.controller.Node;
 
 public class Node {
-  public void resetPhysics();
+  public void resetPhysics(boolean recursive=false);
   // ...
 }
 ```
@@ -1341,7 +1341,7 @@ public class Node {
 %tab "MATLAB"
 
 ```MATLAB
-wb_supervisor_node_reset_physics(node)
+wb_supervisor_node_reset_physics(node, recursive)
 ```
 
 %tab-end
@@ -1350,7 +1350,7 @@ wb_supervisor_node_reset_physics(node)
 
 | name | service/topic | data type | data type definition |
 | --- | --- | --- | --- |
-| `/supervisor/node/reset_physics` | `service` | `webots_ros::node_reset_functions` | `uint64 node`<br/>`---`<br/>`int8 success` |
+| `/supervisor/node/reset_physics` | `service` | [`webots_ros::set_bool`](ros-api.md#common-services) | |
 
 %tab-end
 

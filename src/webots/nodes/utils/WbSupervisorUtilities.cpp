@@ -802,15 +802,30 @@ void WbSupervisorUtilities::handleMessage(QDataStream &stream) {
     }
     case C_SUPERVISOR_NODE_RESET_PHYSICS: {
       unsigned int id;
+      unsigned char recursive;
 
       stream >> id;
+      stream >> recursive;
 
       WbNode *const node = getProtoParameterNodeInstance(WbNode::findNode(id));
-      WbSolid *const solid = dynamic_cast<WbSolid *>(node);
-      if (solid)
-        solid->resetPhysics();
-      else
-        mRobot->warn(tr("wb_supervisor_node_reset_physics() can exclusively be used with a Solid"));
+
+      if (recursive) {
+        QList<WbNode *> descendants = QList<WbNode *>({ node });
+        for (int i = 0; i < descendants.size(); ++i) {
+          WbNode *child = descendants.at(i);
+          WbSolid *solid = dynamic_cast<WbSolid *>(child);
+          if (solid)
+            solid->resetPhysics();
+          descendants.append(child->subNodes(true, false, false));
+        }
+      }
+      else {
+        WbSolid *const solid = dynamic_cast<WbSolid *>(node);
+        if (solid)
+          solid->resetPhysics();
+        else
+          mRobot->warn(tr("wb_supervisor_node_reset_physics() can exclusively be used with a Solid"));
+      }
       return;
     }
     case C_SUPERVISOR_NODE_RESTART_CONTROLLER: {

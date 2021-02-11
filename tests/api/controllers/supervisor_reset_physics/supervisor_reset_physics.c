@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
   ts_assert_boolean_equal(stepCount < 55, "Balls don't roll as expected.");
 
   // stop inertia of BALL1
-  wb_supervisor_node_reset_physics(nodeBall1);
+  wb_supervisor_node_reset_physics(nodeBall1, false);
 
   wb_robot_step(32 * TIME_STEP);
 

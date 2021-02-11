@@ -133,8 +133,8 @@ void Node::setVelocity(const double velocity[6]) {
   wb_supervisor_node_set_velocity(nodeRef, velocity);
 }
 
-void Node::resetPhysics() {
-  wb_supervisor_node_reset_physics(nodeRef);
+void Node::resetPhysics(bool recursive) {
+  wb_supervisor_node_reset_physics(nodeRef, recursive);
 }
 
 void Node::restartController() {

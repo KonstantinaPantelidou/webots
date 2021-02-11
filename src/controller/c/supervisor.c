@@ -389,6 +389,7 @@ static bool contact_points_include_descendants = false;
 static bool allows_contact_point_internal_node = false;
 static WbNodeRef static_balance_node_ref = NULL;
 static WbNodeRef reset_physics_node_ref = NULL;
+static bool reset_physics_node_recursive = false;
 static WbNodeRef restart_controller_node_ref = NULL;
 static bool node_visible = true;
 static WbNodeRef move_viewpoint_node_ref = NULL;
@@ -681,6 +682,7 @@ static void supervisor_write_request(WbDevice *d, WbRequest *r) {
   if (reset_physics_node_ref) {
     request_write_uchar(r, C_SUPERVISOR_NODE_RESET_PHYSICS);
     request_write_uint32(r, reset_physics_node_ref->id);
+    request_write_uchar(r, reset_physics_node_recursive);
   }
   if (restart_controller_node_ref) {
     request_write_uchar(r, C_SUPERVISOR_NODE_RESTART_CONTROLLER);
@@ -2093,7 +2095,7 @@ void wb_supervisor_node_set_velocity(WbNodeRef node, const double velocity[6]) {
   robot_mutex_unlock_step();
 }
 
-void wb_supervisor_node_reset_physics(WbNodeRef node) {
+void wb_supervisor_node_reset_physics(WbNodeRef node, bool recursive) {
   if (!robot_check_supervisor(__FUNCTION__))
     return;
 
@@ -2105,6 +2107,7 @@ void wb_supervisor_node_reset_physics(WbNodeRef node) {
 
   robot_mutex_lock_step();
   reset_physics_node_ref = node;
+  reset_physics_node_recursive = recursive;
   wb_robot_flush_unlocked();
   reset_physics_node_ref = NULL;
   robot_mutex_unlock_step();
